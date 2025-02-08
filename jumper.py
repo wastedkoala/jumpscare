@@ -4,11 +4,11 @@ import win32con
 import pyvolume
 
 hostname = '192.168.0.10'
-port = 8080
+port = 3600
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-s.bind(hostname, port)
+s.bind((hostname, port))
 
 s.listen()
 
@@ -31,6 +31,9 @@ while True:
         win32gui.ShowWindow(jump, win32con.SW_MAXIMIZE)
         time.sleep(2.5)
         win32gui.PostMessage(jump,win32con.WM_CLOSE,0,0)
+        conn.send("modtaget".encode("utf-8"))
+    else:
+        conn.send("forkert".encode("utf-8"))
 
     
         
